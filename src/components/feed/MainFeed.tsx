@@ -77,7 +77,7 @@ export async function MainFeed() {
             key={post.id}
             post={{
               ...post,
-              profiles: post.profiles as { id: string; display_name: string; avatar_url: string | null } | null,
+              profiles: post.profiles as unknown as { id: string; display_name: string; avatar_url: string | null } | null,
             }}
             likesCount={likeCountByPost[post.id] || 0}
             commentsCount={countByPost[post.id] || 0}
