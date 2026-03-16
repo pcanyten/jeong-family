@@ -28,7 +28,12 @@ export default function SignupPage() {
     });
     setLoading(false);
     if (signUpError) {
-      setError(signUpError.message || "가입에 실패했습니다.");
+      const msg = signUpError.message || "";
+      if (msg.toLowerCase().includes("rate limit") || msg.includes("email rate limit exceeded")) {
+        setError("요청이 너무 많습니다. 5~10분 후에 다시 시도해 주세요.");
+      } else {
+        setError(msg || "가입에 실패했습니다.");
+      }
       return;
     }
     if (data.user) {
